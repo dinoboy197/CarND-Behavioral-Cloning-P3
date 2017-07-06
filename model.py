@@ -13,8 +13,12 @@ measurements = []
 with open('data/driving_log.csv') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
-        images.append(cv2.imread('data/IMG/' + row['center'].split('/')[-1]))
-        measurements.append(float(row['steering']))
+        image = cv2.imread('data/IMG/' + row['center'].split('/')[-1])
+        images.append(image)
+        images.append(cv2.flip(image,1))
+        measurement = float(row['steering'])
+        measurements.append(measurement)
+        measurements.append(measurement * -1.0)
 
 X_train = np.array(images)
 y_train = np.array(measurements)
