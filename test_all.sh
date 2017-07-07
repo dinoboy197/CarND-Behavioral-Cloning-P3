@@ -16,9 +16,9 @@ array_not_contains () {
     return $in
 }
 
-# loop through all branches
-branches=()
-eval "$(git for-each-ref --shell --format='branches+=(%(refname:short))' refs/heads/)"
+# only look at master
+branches=('master')
+#eval "$(git for-each-ref --shell --format='branches+=(%(refname:short))' refs/heads/)"
 for branch in "${branches[@]}"; do
     # loop through all commits by Taylor
     git checkout -q $branch > /dev/null
@@ -38,6 +38,7 @@ for branch in "${branches[@]}"; do
                     git checkout -q $sha > /dev/null
                     rm -f data
                     ln -s $tdata data
+                    touch $model_file
                     python model.py > $stats_file 2>&1
                     mv model.h5 $model_file
                 fi
