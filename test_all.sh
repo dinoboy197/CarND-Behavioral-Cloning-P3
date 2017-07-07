@@ -38,6 +38,7 @@ for branch in "${branches[@]}"; do
                     git checkout -q $sha > /dev/null
                     rm -f data
                     ln -s $tdata data
+                    touch $model_file
                     python model.py > $stats_file 2>&1
                     mv model.h5 $model_file
                 fi
