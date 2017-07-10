@@ -10,7 +10,7 @@ from sklearn.utils import shuffle
 
 import numpy as np
 
-steering_correction = 0.2
+steering_correction = 0.0
 batch_size=32
 
 
