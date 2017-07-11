@@ -13,7 +13,6 @@ import numpy as np
 steering_correction = 0.2
 batch_size=32
 
-
 samples = []
 with open('data/driving_log.csv') as csvfile:
     for line in csv.DictReader(csvfile):
@@ -50,14 +49,22 @@ validation_generator = generator(validation_samples)
 model = Sequential()
 model.add(Cropping2D(cropping=((50,20), (0,0)), input_shape=(160,320,3)))
 model.add(Lambda(lambda x: (x / 255.0) - 0.5))
-model.add(Conv2D(6, 5, 5, activation='relu'))
+model.add(Conv2D(24, 5, 5, activation='relu'))
 model.add(MaxPooling2D())
-model.add(Conv2D(6, 5, 5, activation='relu'))
+model.add(Conv2D(36, 5, 5, activation='relu'))
 model.add(MaxPooling2D())
+model.add(Conv2D(48, 5, 5, activation='relu'))
+model.add(MaxPooling2D())
+model.add(Conv2D(64, 3, 3, activation='relu'))
+model.add(MaxPooling2D())
+#model.add(Conv2D(64, 3, 3, activation='relu'))
+#model.add(MaxPooling2D())
 model.add(Flatten())
-model.add(Dense(128, activation='relu'))
+model.add(Dense(100, activation='relu'))
 model.add(Dropout(0.5))
-model.add(Dense(84, activation='relu'))
+model.add(Dense(50, activation='relu'))
+model.add(Dropout(0.5))
+model.add(Dense(10, activation='relu'))
 model.add(Dropout(0.5))
 model.add(Dense(1))
 
