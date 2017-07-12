@@ -56,11 +56,13 @@ For details about how I created the training data, see the next section.
 
 The overall strategy for deriving a model architecture was to start with a well-known and high-performance network, and tune it for this steering angle prediction task.
 
-My first step was to use a convolution neural network model similar to [the publically published NVidia architecture used for their self-driving car efforts](https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/). Given that I'm attempting to solve the exact same problem (steering angle command prediction) and their network is state of the art, that seemed like a good place to start. I removed one convolutional and one fully connected layer from the NVidia architecturet to reduce memory processing costs during training.
+My first step was to use a convolution neural network model similar to [the publically published NVidia architecture used for their self-driving car efforts](https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/). Given that I'm attempting to solve the exact same problem (steering angle command prediction) and their network is state of the art, that seemed like a good place to start. I removed one convolutional and one fully connected layer from the NVidia architecture to reduce memory processing costs during training.
 
 In between the convolutional layers of my model, I introduced Relu activations to introduce non-linearity, max pooling to reduce overfitting and computatational complexity, and 50% dropout during training (also to reduce overfitting).
 
-The final step was to run the simulator to see how well the vehicle was driving around track one. The original data provided to me trained a model which only can off the track in one spot. After I augmented the data with left and right recovery, as well as images flipped on the vertical, the vehicle trained with this data did not run off the track; in only one spot did the simulated vehicle get close to running of the track on a curve.
+To train the model, I initally collected simulated image data driving around the track several times in the center of the driving lane.
+
+The final step was to run the simulator to see how well the vehicle was driving around track one. The model drove the vehicle off the simulated track in one spot. I then augmented the training data with several image segments of left and right recovery, as well as images flipped on the vertical. Once trained on this data, the vehicle did not run off the track; in only one spot did the simulated vehicle get close to running of the track on a curve (but  did not leave the driving surface, pop up on legdes, or roll over any unsafe surfaces).
 
 #### 2. Final Model Architecture
 
