@@ -10,13 +10,10 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/placeholder.png "Model Visualization"
-[image2]: ./examples/placeholder.png "Grayscaling"
-[image3]: ./examples/placeholder_small.png "Recovery Image"
-[image4]: ./examples/placeholder_small.png "Recovery Image"
-[image5]: ./examples/placeholder_small.png "Recovery Image"
-[image6]: ./examples/placeholder_small.png "Normal Image"
-[image7]: ./examples/placeholder_small.png "Flipped Image"
+[center]: ./examples/center.jpg "Center lane driving"
+[recover1]: ./examples/recover1.jpg "Left recovery start"
+[recover2]: ./examples/recover2.jpg "Left recovery in progress"
+[recover3]: ./examples/recover3.jpg "Left recovery complete"
 
 ### Model Architecture and Training Strategy
 
@@ -99,26 +96,21 @@ The [model architecture](https://github.com/dinoboy197/CarND-Behavioral-Cloning-
 | Fully connected		| 10 output neurons                          	|
 | Output        		| Output - 1 steering angle command 			|
 
-![alt text][image1]
-
 #### 3. Creation of the Training Set & Training Process
 
 _Training Set_
 
 I began with a sample of good driving behavior provided to me for training, which provided center, left, and right images taken from different points on the front end of the vehicle. This data includes multiple laps on track one using center lane driving. Here is an example image of center lane driving:
 
-![alt text][image2]
+![center][center]
 
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to correct major driving errors when the vehicle is about to run off the road. These images show what a recovery looks like starting from the left side:
 
-![alt text][image3]
-![alt text][image4]
-![alt text][image5]
+![recover1][recover1]
+![recover2][recover2]
+![recover3][recover3]
 
-To augment the data sat, I also flipped images and angles during training to further generalize the model. For example, here is an image that has then been flipped:
-
-![alt text][image6]
-![alt text][image7]
+To augment the data sat, I also flipped images and angles during training to further generalize the model.
 
 After the collection process, I had 8253 data image frames, each including center, left, and right images for a total of 24759.
 
