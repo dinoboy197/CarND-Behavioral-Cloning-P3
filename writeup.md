@@ -58,6 +58,8 @@ The overall strategy for deriving a model architecture was to start with a well-
 
 My first step was to use a convolution neural network model similar to [the publically published NVidia architecture used for their self-driving car efforts](https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/). Given that I'm attempting to solve the exact same problem (steering angle command prediction) and their network is state of the art, that seemed like a good place to start. I removed one convolutional and one fully connected layer from the NVidia architecture to reduce memory processing costs during training.
 
+Before the convolutional layers of the model, a cropping layer removes the top (including sky) and bottom (including car image), to reduce noise in training. An additional layer normalizes each give each data point zero mean and a low standard deviation.
+
 In between the convolutional layers of my model, I introduced Relu activations to introduce non-linearity, max pooling to reduce overfitting and computatational complexity, and 50% dropout during training (also to reduce overfitting).
 
 To train the model, I initally collected simulated image data driving around the track several times in the center of the driving lane.
